@@ -1,0 +1,14 @@
+<project>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>wsdldoctool-maven-plugin</artifactId>
+        <configuration>
+            <includes>
+               <include>NewWSDLFile.wsdl</include>
+            </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
