@@ -13,12 +13,50 @@
    </properties>
 
    <build>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <version>2.9</version>
+            <configuration>
+               <goalPrefix>wsdldoc</goalPrefix>
+            </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
       <plugins>
          <plugin>
             <artifactId>maven-plugin-plugin</artifactId>
-            <version>2.6</version>
+            <executions>
+               <execution>
+                  <id>generate-help-mojo</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>helpmojo</goal>
+                  </goals>
+                  <configuration>
+                     <helpPackageName>org.intalio.wsdldoctool</helpPackageName>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.0</version>
             <configuration>
-               <goalPrefix>wsdldoc</goalPrefix>
+               <reportPlugins>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-plugin-plugin</artifactId>
+                     <version>2.9</version>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-javadoc-plugin</artifactId>
+                     <version>${javadocPluginVersion}</version>
+                  </plugin>
+               </reportPlugins>
             </configuration>
          </plugin>
       </plugins>

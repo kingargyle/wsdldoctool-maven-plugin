@@ -1,0 +1,46 @@
+The *wsdldoctool-maven-plugin* is a maven plugin for the Turmeric SOA 
+wsdl documentation generator.   It provides a cleaner interface to
+executing the wsdl documentation generator instead of having to use the
+exec:java plugin.
+
+Currently there is no maven repository created for this plugin so users
+will need to clone and build the source themselves.  Building the
+plugin is as easy as:
+
+{{{
+mvn clean install
+}}}
+
+To generate site documentation and usage of the plugin:
+{{{
+mvn clean install site
+}}}
+
+=== Usage
+
+Generating documentation for a wsdl:
+{{{
+     <plugin>
+        <groupId>org.intalio.wsdldoc</groupId>
+        <artifactId>wsdldoctool-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+               <goal>generate-documentation</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+            <includes>
+               <include>${project.build.directory}/test-classes/unit/basic-test/NewWSDLFile.wsdl</include>
+            </includes>
+        </configuration>
+      </plugin>
+}}}
+
+To get further help:
+
+{{{
+mvn wsdldoc:help
+}}}
+

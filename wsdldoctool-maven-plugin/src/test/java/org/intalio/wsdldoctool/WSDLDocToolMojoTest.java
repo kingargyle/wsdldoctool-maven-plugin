@@ -72,11 +72,28 @@ public class WSDLDocToolMojoTest extends AbstractMojoTestCase {
 
 		assertNotNull(mojo.getIncludes());
 		for (String value : mojo.getIncludes()) {
-			if (value.equals("NewWSDLFile.wsdl")) {
+			if (value.contains("NewWSDLFile.wsdl")) {
 				return;
 			}
 		}
 		fail("Did not find expected NewWSDLFile.wsdl entry");
+	}
+
+	public void testExecuteMojo() throws Exception {
+		String outputLocation = projectBaseDir.getAbsolutePath()
+				+ "/wsdldoc/documentation";
+		File testPom = new File(projectBaseDir, "basic-test-plugin.xml");
+
+		WSDLDocToolMojo mojo = (WSDLDocToolMojo) lookupMojo(getTestMojoGoal(),
+				testPom);
+
+		String[] wsdls = { projectBaseDir.getAbsolutePath()
+				+ File.separatorChar + "NewWSDLFile.wsdl" };
+		mojo.setIncludes(wsdls);
+		mojo.setOutputDir(outputLocation);
+		mojo.execute();
+		assertTrue(new File(projectBaseDir,
+				"/wsdldoc/documentation/wsdlApiSpecDocs/index.html").exists());
 	}
 
 }

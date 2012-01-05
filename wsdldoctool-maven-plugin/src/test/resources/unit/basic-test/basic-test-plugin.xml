@@ -3,9 +3,16 @@
     <plugins>
       <plugin>
         <artifactId>wsdldoctool-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+               <goal>generate-documentation</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
             <includes>
-               <include>NewWSDLFile.wsdl</include>
+               <include>${project.build.directory}/test-classes/unit/basic-test/NewWSDLFile.wsdl</include>
             </includes>
         </configuration>
       </plugin>

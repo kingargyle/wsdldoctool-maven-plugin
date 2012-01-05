@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.logging.Log;
 import org.ebayopensource.turmeric.tools.annoparser.driver.Driver;
 
 /**
@@ -55,7 +56,7 @@ public class WSDLDocToolMojo extends AbstractMojo {
 	 * @optional
 	 */
 
-	private final String outputDir = "${project.build.directory}/wsdldoc/documentation";
+	private String outputDir = "${project.build.directory}/wsdldoc/documentation";
 
 	/**
 	 * The path the configuration XML fle.
@@ -63,7 +64,7 @@ public class WSDLDocToolMojo extends AbstractMojo {
 	 * @parameter expression="${wsdldoc.configPath}"
 	 * @optional
 	 */
-	private final String configPath = "";
+	private String configPath = "";
 
 	/**
 	 * The path to the css file to be used.
@@ -71,7 +72,9 @@ public class WSDLDocToolMojo extends AbstractMojo {
 	 * @parameter expression="$wsdldoc.cssPath}"
 	 * @optional
 	 */
-	private final String cssPath = "";
+	private String cssPath = "";
+
+	private final Log log = getLog();
 
 	/**
 	 * 
@@ -84,9 +87,11 @@ public class WSDLDocToolMojo extends AbstractMojo {
 
 		}
 
+		log.info("Starting documentation generation");
 		Driver driver = new Driver(outputDir, configPath,
 				Arrays.asList(includes), cssPath);
 		driver.process();
+		log.info("Finished execution");
 	}
 
 	public void setExcludes(String[] excludes) {
@@ -115,5 +120,17 @@ public class WSDLDocToolMojo extends AbstractMojo {
 
 	public String getOutputDir() {
 		return outputDir;
+	}
+
+	public void setOutputDir(String output) {
+		outputDir = output;
+	}
+
+	public void setConfigPath(String path) {
+		configPath = path;
+	}
+
+	public void setCssPath(String path) {
+		cssPath = path;
 	}
 }
