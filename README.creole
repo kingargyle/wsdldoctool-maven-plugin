@@ -1,4 +1,4 @@
-The *wsdldoctool-maven-plugin* is a maven plugin for the Turmeric SOA 
+The **wsdldoctool-maven-plugin** is a maven plugin for the Turmeric SOA 
 wsdl documentation generator.   It provides a cleaner interface to
 executing the wsdl documentation generator instead of having to use the
 exec:java plugin.
@@ -16,7 +16,7 @@ To generate site documentation and usage of the plugin:
 mvn clean install site
 }}}
 
-=== Usage
+=== Usage ===
 
 Generating documentation for a wsdl:
 {{{
